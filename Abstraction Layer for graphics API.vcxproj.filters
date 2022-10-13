@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="DirectX11">
+      <UniqueIdentifier>{27523ec7-817e-4746-beac-dfb89dcd1f19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX12">
+      <UniqueIdentifier>{d9f35e44-2355-4d8a-9d3d-bb9a99821b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{352bbf70-fe57-4430-aba7-a01e4ec07b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\Window">
+      <UniqueIdentifier>{fd933055-ba6f-4223-890f-c24ff1f307d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\Window\Desktop">
+      <UniqueIdentifier>{50837df1-202e-4528-9f55-c7ebb3a62f25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\Window\Desktop\Procedure">
+      <UniqueIdentifier>{0f06d916-d43d-4ddd-8b3b-2c5ea252aead}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Application.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Window_Desktop.cpp">
+      <Filter>Application\Window\Desktop</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_Interface.h">
+      <Filter>Application\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_Desktop.h">
+      <Filter>Application\Window\Desktop</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_Desktop_Procedure.h">
+      <Filter>Application\Window\Desktop\Procedure</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
