@@ -4,6 +4,8 @@
 *		File	: Application.cpp
 *		Detail	:
 ===================================================================================*/
+#include "Graphics.h"
+
 #include "Application.h"
 
 /* Constructor */
@@ -28,12 +30,17 @@ Application::Application(const int width, const int height, const HINSTANCE hIns
 /* Initialize */
 bool Application::Init()
 {
+    if (!Graphics::Get()->Init(this))
+        return false;
+
     return true;
 }
 
 /* Uninitialize */
 void Application::Uninit()
 {
+    Graphics::Get()->Uninit();
+    Graphics::Get(true);
 }
 
 /* Update */
@@ -44,4 +51,7 @@ void Application::Upadte()
 /* Draw */
 void Application::Draw()
 {
+    Graphics::Get()->Clear();
+
+    Graphics::Get()->Present();
 }

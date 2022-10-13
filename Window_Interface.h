@@ -11,6 +11,21 @@ class WindowInterface
 public:
 	virtual ~WindowInterface() {}
 	virtual bool Close() = 0;
+	virtual void* GetHandle() = 0;
+
+	//**************************************************
+	/// \brief Get window width of initialized value
+	/// 
+	/// \return window width
+	//**************************************************
+	int GetWidth()	{ return m_width; }
+	
+	//**************************************************
+	/// \brief Get window height of initialized value
+	/// 
+	/// \return window height
+	//**************************************************
+	int GetHeight() { return m_height; }
 
 protected:
 	//**************************************************
@@ -28,8 +43,7 @@ protected:
 		:m_width(width), m_height(height)
 	{}
 
-
-	int		m_width;		// size of window width
-	int		m_height;		// size of window height
+	int					m_width;		// size of window width
+	int					m_height;		// size of window height
 };
 

@@ -7,12 +7,22 @@
 #include "Application.h"
 
 /* main */
+#ifdef USING_API_DIRECTX11
 int __stdcall WinMain(
 	_In_		HINSTANCE hInstance,
 	_In_opt_	HINSTANCE hPrevInstance,
 	_In_		LPSTR lpCmdLine,
 	_In_		int nCmdShow
 )
+#endif // USING_API_DIRECTX11
+#ifdef USING_API_DIRECTX12
+int __stdcall WinMain(
+	_In_		HINSTANCE hInstance,
+	_In_opt_	HINSTANCE hPrevInstance,
+	_In_		LPSTR lpCmdLine,
+	_In_		int nCmdShow
+)
+#endif // USING_API_DIRECTX12
 {
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);

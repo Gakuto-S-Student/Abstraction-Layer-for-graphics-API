@@ -45,9 +45,16 @@ public:
 	//**************************************************
 	bool Close() override;
 
+	//**************************************************
+	/// \brief Get window handle for desktop application
+	/// 
+	/// \return window handle
+	//**************************************************
+	void* GetHandle() override;
+
 private:
-	const HINSTANCE m_hInstance;	// ハンドルインスタンス
-	HWND			m_windowHandle;	// ウィンドウハンドル
+	const HINSTANCE m_hInstance;	// handle instance
 	LPCWSTR			m_className;	// window class name
+	HWND			m_windowHandle;	// window handle (HWND)
 };
 

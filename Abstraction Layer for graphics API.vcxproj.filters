@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="DirectX11">
-      <UniqueIdentifier>{27523ec7-817e-4746-beac-dfb89dcd1f19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DirectX12">
-      <UniqueIdentifier>{d9f35e44-2355-4d8a-9d3d-bb9a99821b88}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Application">
       <UniqueIdentifier>{352bbf70-fe57-4430-aba7-a01e4ec07b64}</UniqueIdentifier>
     </Filter>
@@ -19,6 +13,15 @@
     <Filter Include="Application\Window\Desktop\Procedure">
       <UniqueIdentifier>{0f06d916-d43d-4ddd-8b3b-2c5ea252aead}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{a7e3592e-b5e4-4f56-8d65-27d98665b68f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\DirectX11">
+      <UniqueIdentifier>{27523ec7-817e-4746-beac-dfb89dcd1f19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\DirectX12">
+      <UniqueIdentifier>{d9f35e44-2355-4d8a-9d3d-bb9a99821b88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -27,6 +30,15 @@
     </ClCompile>
     <ClCompile Include="Window_Desktop.cpp">
       <Filter>Application\Window\Desktop</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics_DirectX11.cpp">
+      <Filter>Graphics\DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics_DirectX12.cpp">
+      <Filter>Graphics\DirectX12</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +53,18 @@
     </ClInclude>
     <ClInclude Include="Window_Desktop_Procedure.h">
       <Filter>Application\Window\Desktop\Procedure</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Interface.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_DirectX11.h">
+      <Filter>Graphics\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_DirectX12.h">
+      <Filter>Graphics\DirectX12</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

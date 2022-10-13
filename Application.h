@@ -7,8 +7,8 @@
 #pragma once
 
 /* Select using Graphics API */
-#define USING_API_DIRECTX11
-// #define USING_API_DIRECTX12
+// #define USING_API_DIRECTX11
+#define USING_API_DIRECTX12
 
 /*  Application class  */
 #ifdef USING_API_DIRECTX11

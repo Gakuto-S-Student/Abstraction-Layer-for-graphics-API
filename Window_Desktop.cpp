@@ -65,3 +65,9 @@ bool WindowDesktop::Close()
 
     return false;
 }
+
+/* Get HWND */
+void* WindowDesktop::GetHandle()
+{
+    return m_windowHandle;
+}
