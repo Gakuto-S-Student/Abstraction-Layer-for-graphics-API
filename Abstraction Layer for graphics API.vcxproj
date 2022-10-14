@@ -144,21 +144,62 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Graphics_Cube.cpp" />
+    <ClCompile Include="Graphics_Cube11.cpp" />
+    <ClCompile Include="Graphics_Cube12.cpp" />
     <ClCompile Include="Graphics_DirectX11.cpp" />
     <ClCompile Include="Graphics_DirectX12.cpp" />
+    <ClCompile Include="Graphics_Shader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Window_Desktop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Graphics_Cube.h" />
+    <ClInclude Include="Graphics_Cube11.h" />
+    <ClInclude Include="Graphics_Cube12.h" />
+    <ClInclude Include="Graphics_Cube_Interface.h" />
     <ClInclude Include="Graphics_DirectX11.h" />
     <ClInclude Include="Graphics_DirectX12.h" />
     <ClInclude Include="Graphics_Interface.h" />
+    <ClInclude Include="Graphics_Shader.h" />
     <ClInclude Include="Window_Desktop.h" />
     <ClInclude Include="Window_Desktop_Procedure.h" />
     <ClInclude Include="Window_Interface.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="pixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="vertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="common.hlsli">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

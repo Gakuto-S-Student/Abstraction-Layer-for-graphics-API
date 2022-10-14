@@ -21,6 +21,19 @@ class GraphicsDirectX12 : public GraphicsInterface
 {
 public:
 	//**************************************************
+	/// \brief These are roots index for send to shader
+	/// 
+	/// \return none
+	//**************************************************
+	struct CONSTANT_BUFFER_INDEX
+	{
+		static const int WORLD_MATRIX		= 0;	// World buffer root index
+		static const int VIEW_MATRIX		= 1;	// View buffer root index
+		static const int PROJECTION_MATRIX	= 2;	// Projection buffer root index
+		static const int TEXTURE_INDEX		= 3;	// Texture buffer root index
+	};
+
+	//**************************************************
 	/// \brief Initialize DirectX12
 	/// 
 	/// \return Success is true
@@ -48,6 +61,41 @@ public:
 	//**************************************************
 	void Present()	override;
 
+	//**************************************************
+	/// \brief Get device pointer
+	/// 
+	/// \return device pointer
+	//**************************************************
+	void* Device() override;
+
+	//**************************************************
+	/// \brief Get virtual context pointer
+	/// 
+	/// \return virtual context pointer
+	//**************************************************
+	void* Context() override;
+
+	//**************************************************
+	/// \brief Set matrix
+	/// 
+	/// \return none
+	//**************************************************
+	void SetWorldMatrix(UINT64 addressOfGpu) override;
+
+	//**************************************************
+	/// \brief Set matrix
+	/// 
+	/// \return none
+	//**************************************************
+	void SetViewMatrix(UINT64 addressOfGpu) override;
+
+	//**************************************************
+	/// \brief Set matrix
+	/// 
+	/// \return none
+	//**************************************************
+	void SetProjectionMatrix(UINT64 addressOfGpu) override;
+
 private:
 	//**************************************************
 	/// \brief Create device and swapchain
@@ -65,14 +113,14 @@ private:
 	);
 
 	//**************************************************
-	/// \brief Create device and swapchain
+	/// \brief Create render target view
 	/// 
 	/// \return Succcess is true
 	//**************************************************
 	bool CreateRenderTargetView();
 
 	//**************************************************
-	/// \brief Create device and swapchain
+	/// \brief Create depth buffer
 	/// 
 	/// \param[in] width	 ->	buffer size width
 	/// \param[in] height	 ->	buffer size height
@@ -84,14 +132,21 @@ private:
 		const int height
 	);
 	//**************************************************
-	/// \brief Create device and swapchain
+	/// \brief Create fence
 	/// 
 	/// \return Succcess is true
 	//**************************************************
 	bool CreateFence();
 
 	//**************************************************
-	/// \brief Create device and swapchain
+	/// \brief Create graphics pipeline
+	/// 
+	/// \return Succcess is true
+	//**************************************************
+	bool CreateGraphicsPipeline();
+
+	//**************************************************
+	/// \brief Set Resource barrier
 	/// 
 	/// \param[in] width	 ->	buffer size width
 	/// \param[in] height	 ->	buffer size height
@@ -106,7 +161,7 @@ private:
 	);
 
 	//**************************************************
-	/// \brief Create device and swapchain
+	/// \brief Set viewport
 	/// 
 	/// \return none
 	//**************************************************
@@ -116,7 +171,7 @@ private:
 	);
 
 	//**************************************************
-	/// \brief Create device and swapchain
+	/// \brief Set scissor rect
 	/// 
 	/// \return none
 	//**************************************************
@@ -124,7 +179,6 @@ private:
 		const int width,
 		const int height
 	);
-
 
 	static const UINT									k_backBufferNum = 2;
 	Microsoft::WRL::ComPtr<ID3D12Device>				m_device;
@@ -138,6 +192,8 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>		m_depthBufferHeap;
 	Microsoft::WRL::ComPtr<ID3D12Fence>					m_fence;
 	UINT												m_fenceValue = 0;
+	Microsoft::WRL::ComPtr<ID3D12RootSignature>			m_rootSignature;
+	Microsoft::WRL::ComPtr<ID3D12PipelineState>			m_pipelineState;
 	D3D12_VIEWPORT										m_viewport{};
 	D3D12_RECT											m_scissorRect{};
 };

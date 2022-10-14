@@ -6,14 +6,12 @@
 ===================================================================================*/
 #include "Application.h"
 #include "Window_Desktop.h"
+#include "Graphics_Shader.h"
 
 #include "Graphics_DirectX11.h"
 using namespace Microsoft::WRL;
 using namespace DirectX;
 
-#define SAFE_RELEASE(p)	\
-	if(p) p->Release();\
-	p = nullptr;\
 
 /* Initialize */
 bool GraphicsDirectX11::Init(Application* app)
@@ -44,6 +42,9 @@ bool GraphicsDirectX11::Init(Application* app)
 	
 	if (!this->CreateConstantBuffers())
 		return false;
+
+	if (!this->CreateShader())
+		return false;
 	
 	this->SetViewport(width, height);
 
@@ -73,12 +74,46 @@ void GraphicsDirectX11::Clear()
 	float clearColor[4]{ 0.0f, 0.5f, 0.0f, 1.0f };
 	m_context->ClearRenderTargetView(m_renderTargetView, clearColor);
 	m_context->ClearDepthStencilView(m_depthStencilView, D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH, D3D11_MAX_DEPTH, NULL);
+
+	m_context->IASetInputLayout(m_inputLayout);
+	m_context->VSSetShader(m_vertexShader, nullptr, 0);
+	m_context->PSSetShader(m_pixelShader, nullptr, 0);
 }
 
 /* Present buffer */
 void GraphicsDirectX11::Present()
 {
 	m_swapChain->Present(true, NULL);
+}
+
+/* Get device pointer */
+void* GraphicsDirectX11::Device()
+{
+	return m_device;
+}
+
+// Get context pointer
+void* GraphicsDirectX11::Context()
+{
+	return m_context;
+}
+
+// Set world matrix
+void GraphicsDirectX11::SetWorldMatrix(DirectX::XMMATRIX world)
+{
+	m_context->UpdateSubresource(m_modelMatrix, 0, nullptr, &world, 0, 0);
+}
+
+// Set view matrix
+void GraphicsDirectX11::SetViewMatrix(DirectX::XMMATRIX view)
+{
+	m_context->UpdateSubresource(m_viewMatrix, 0, nullptr, &view, 0, 0);
+}
+
+// Set projection matrix
+void GraphicsDirectX11::SetProjectionMatrix(DirectX::XMMATRIX projection)
+{
+	m_context->UpdateSubresource(m_projectionMatrix, 0, nullptr, &projection, 0, 0);
 }
 
 // Create device and swapchain
@@ -178,7 +213,7 @@ bool GraphicsDirectX11::CreateRasterizerState()
 {
 	HRESULT ret{};
     D3D11_RASTERIZER_DESC desc{};
-	desc.CullMode           = D3D11_CULL_MODE::D3D11_CULL_BACK;
+	desc.CullMode           = D3D11_CULL_MODE::D3D11_CULL_NONE;
 	desc.FillMode           = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 	desc.DepthClipEnable    = true;
 	desc.MultisampleEnable  = false;
@@ -290,6 +325,34 @@ bool GraphicsDirectX11::CreateConstantBuffers()
 	m_context->VSSetConstantBuffers(2, 1, &m_projectionMatrix); // register b2 projection matrix 
 
 	return true;	// Success
+}
+
+// Create shader
+bool GraphicsDirectX11::CreateShader()
+{
+	std::string vertexBuffer, pixelBuffer;
+	GraphicsShader::LoadFile("vertexShader.cso", vertexBuffer);
+	GraphicsShader::LoadFile("pixelShader.cso", pixelBuffer);
+
+	m_device->CreateVertexShader(vertexBuffer.c_str(), vertexBuffer.size(), nullptr, &m_vertexShader);
+	m_device->CreatePixelShader(pixelBuffer.c_str(), pixelBuffer.size(), nullptr, &m_pixelShader);
+
+	D3D11_INPUT_ELEMENT_DESC elementDesc[]
+	{
+		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,    0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},
+	};
+
+	// 頂点レイアウト設定
+	m_device->CreateInputLayout(
+		elementDesc,
+		ARRAYSIZE(elementDesc),
+		vertexBuffer.c_str(),
+		vertexBuffer.size(),
+		&m_inputLayout
+	);
+
+	return true;
 }
 
 // Set viewport

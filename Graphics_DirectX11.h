@@ -13,6 +13,10 @@
 //// Link library ////
 #pragma comment(lib, "d3d11.lib")
 
+#define SAFE_RELEASE(p)	\
+	if(p) p->Release();\
+	p = nullptr;\
+
 #include "Graphics_Interface.h"
 
 class GraphicsDirectX11 : public GraphicsInterface
@@ -45,6 +49,41 @@ public:
 	/// \return none
 	//**************************************************
 	void Present()	override;
+
+	//**************************************************
+	/// \brief Get device pointer
+	/// 
+	/// \return device pointer
+	//**************************************************
+	void* Device() override;
+
+	//**************************************************
+	/// \brief Get context pointer
+	/// 
+	/// \return context pointer
+	//**************************************************
+	void* Context() override;
+
+	//**************************************************
+	/// \brief Set World Matrix
+	/// 
+	/// \return context pointer
+	//**************************************************
+	void SetWorldMatrix(DirectX::XMMATRIX world) override;
+
+	//**************************************************
+	/// \brief Set View Matrix
+	/// 
+	/// \return context pointer
+	//**************************************************
+	void SetViewMatrix(DirectX::XMMATRIX view) override;
+
+	//**************************************************
+	/// \brief Set World Matrix
+	/// 
+	/// \return context pointer
+	//**************************************************
+	void SetProjectionMatrix(DirectX::XMMATRIX projection) override;
 
 private:
 	//**************************************************
@@ -118,6 +157,13 @@ private:
 	bool CreateConstantBuffers();
 
 	//**************************************************
+	/// \brief Create shader
+	///    
+	/// \return Succcess is true
+	//**************************************************
+	bool CreateShader();
+
+	//**************************************************
 	/// \brief Create depth stencil view
 	///
 	/// \param[in] width	 ->	window width
@@ -143,5 +189,8 @@ private:
 	ID3D11Buffer*               m_modelMatrix;      	// The buffer is model matrix send to vertex buffer 
 	ID3D11Buffer*				m_viewMatrix;       	// The buffer is view matrix send to vertex buffer
 	ID3D11Buffer*               m_projectionMatrix; 	// The buffer is projection matrix send to vertex buffer
+	ID3D11InputLayout*			m_inputLayout;
+	ID3D11VertexShader*			m_vertexShader;
+	ID3D11PixelShader*			m_pixelShader;
 };
 

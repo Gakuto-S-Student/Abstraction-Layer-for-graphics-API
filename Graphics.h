@@ -5,7 +5,17 @@
 *		Detail	: 
 ===================================================================================*/
 #pragma once
+#include <DirectXMath.h>
 #include "Graphics_Interface.h"
+
+namespace graphicsStructure
+{
+	struct Vertex3D
+	{
+		DirectX::XMFLOAT3 Position;
+		DirectX::XMFLOAT2 TexCoord;
+	};
+}
 
 class Graphics
 {
@@ -16,6 +26,8 @@ public:
 
 	//**************************************************
 	/// \brief Get instance
+	/// 
+	/// \param[in] destroy
 	/// 
 	/// \return GraphicsInterface class pointer
 	//**************************************************

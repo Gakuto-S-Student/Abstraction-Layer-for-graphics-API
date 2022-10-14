@@ -22,6 +22,21 @@
     <Filter Include="Graphics\DirectX12">
       <UniqueIdentifier>{d9f35e44-2355-4d8a-9d3d-bb9a99821b88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Shader">
+      <UniqueIdentifier>{cdc247c7-6759-4942-9595-dc1586769665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Shader\hlsl">
+      <UniqueIdentifier>{a6ed3ba5-73c6-4966-b420-99fa58e595b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Cube">
+      <UniqueIdentifier>{cd5831e1-3642-4c99-b5a9-f216d34d6d66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Cube\DirectX12">
+      <UniqueIdentifier>{b7b66ec1-a116-437a-a094-4b66d6fe569f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Cube\DirectX11">
+      <UniqueIdentifier>{210594f9-819d-4745-8400-2860b5a39667}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -39,6 +54,19 @@
     </ClCompile>
     <ClCompile Include="Graphics_DirectX12.cpp">
       <Filter>Graphics\DirectX12</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics_Shader.cpp">
+      <Filter>Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Graphics_Cube12.cpp">
+      <Filter>Graphics\Cube\DirectX12</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics_Cube11.cpp">
+      <Filter>Graphics\Cube\DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics_Cube.cpp">
+      <Filter>Graphics\Cube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -66,5 +94,34 @@
     <ClInclude Include="Graphics_DirectX12.h">
       <Filter>Graphics\DirectX12</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics_Shader.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Graphics_Cube12.h">
+      <Filter>Graphics\Cube\DirectX12</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Cube11.h">
+      <Filter>Graphics\Cube\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Cube.h">
+      <Filter>Graphics\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Cube_Interface.h">
+      <Filter>Graphics\Cube</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="pixelShader.hlsl">
+      <Filter>Graphics\Shader\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="vertexShader.hlsl">
+      <Filter>Graphics\Shader\hlsl</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="common.hlsli">
+      <Filter>Graphics\Shader\hlsl</Filter>
+    </None>
   </ItemGroup>
 </Project>

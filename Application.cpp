@@ -6,6 +6,7 @@
 ===================================================================================*/
 #include "Graphics.h"
 
+#include "Graphics_Cube12.h"
 #include "Application.h"
 
 /* Constructor */
@@ -25,7 +26,7 @@ Application::Application(const int width, const int height, const HINSTANCE hIns
 }
 #endif // USING_API_DIRECTX12
 
-
+GraphicsCube12 cube[2];
 
 /* Initialize */
 bool Application::Init()
@@ -33,12 +34,18 @@ bool Application::Init()
     if (!Graphics::Get()->Init(this))
         return false;
 
+    cube[0].Init();
+    cube[1].Init();
+
     return true;
 }
 
 /* Uninitialize */
 void Application::Uninit()
 {
+    cube[1].Uninit();
+    cube[0].Uninit();
+
     Graphics::Get()->Uninit();
     Graphics::Get(true);
 }
@@ -52,6 +59,9 @@ void Application::Upadte()
 void Application::Draw()
 {
     Graphics::Get()->Clear();
+
+    cube[0].Draw( 2, 0, 0);
+    cube[1].Draw(-2, 0, 0);
 
     Graphics::Get()->Present();
 }
